@@ -13,18 +13,34 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
         format_sql: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    listener:
+      ack-mode: manual
+    properties:
+      schema.registry.url: http://localhost:8081
+      specific.avro.reader: true
+      allow.auto.create.topics: true
+      request.timeout.ms: 10000
+      retry.backoff.ms: 500
+      reconnect.backoff.max.ms: 1000
 
+    consumer:
+      group-id: person-consumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 # server port
 server:
-  port: 8081
+  port: 8085
 
-# configurantion actuactor
-management:
-  endpoint:
-    health:
-      show-details: always
-  health:
-    diskspace:
-      enabled: true
-    db:
-      enabled: true
+# curtom config
+app:
+  kafka:
+    topic: person
+
+# configurantion actuactorkafka.health.retry.backoff.ms:1000
+#management:
+#  endpoint:
+#    health:
+#      show-details: always

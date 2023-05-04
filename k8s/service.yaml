@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "ms-person-service"
+spec:
+  selector:
+    app: "ms-person"
+  type: LoadBalancer
+  ports:
+    - name: "ms-person-service"
+      port: 8080
+      targetPort: 8085
+      protocol: TCP

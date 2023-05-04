@@ -1,10 +1,11 @@
 package io.github.wesleyosantos91;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PocK8sSpringbootApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
