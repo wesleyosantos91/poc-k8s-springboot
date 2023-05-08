@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 public class ConfigurationProperties {
 
-
     @Value("${app.metrics.timeout}")
     private Integer timeout;
 }

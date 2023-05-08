@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "ms-person-configmap"
+data:
+  DATABASE_HOST: "database-mysql-person-service"
+  DATABASE_PORT: "3306"
+  DATABASE_NAME: "person"
+  BOOTSTRAP_SERVERS_HOST: "kafka-service"
+  BOOTSTRAP_SERVERS_PORT: "29092"
+
+

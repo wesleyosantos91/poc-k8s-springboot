@@ -2,7 +2,7 @@
 # APPLICATION
 ################################################
 server:
-  port: 8085
+  port: 8181
 app:
   kafka:
     topic: person
@@ -14,10 +14,10 @@ app:
 ################################################
 spring:
   kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVERS_HOST:localhost}:${BOOTSTRAP_SERVERS_PORT:29092}
     listener:
       ack-mode: manual
     properties:
-      schema.registry.url: http://localhost:8081
       specific.avro.reader: true
       allow.auto.create.topics: true
       request.timeout.ms: 3000
@@ -34,7 +34,7 @@ spring:
 # CONFIGURATION DATA SOURCE (MYSQL)
 ################################################
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:dev}
+    url: jdbc:mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:person}
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver

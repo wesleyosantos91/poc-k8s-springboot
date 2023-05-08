@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "ms-person"
+  labels:
+    app: "ms-person"
+spec:
+  selector:
+    matchLabels:
+      app: "ms-person"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "ms-person"
+    spec:
+      containers:
+        - name: "ms-person"
+          image: wesleyosantos91/ms-person:v1.4
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+            initialDelaySeconds: 25
+            periodSeconds: 3
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+          envFrom:
+            - configMapRef:
+                name: ms-person-configmap
+            - secretRef:
+                name: ms-person-secret
+          ports:
+            - containerPort: 8081

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "database-mysql-person"
+  labels:
+    app: "database-mysql-person"
+spec:
+  selector:
+    matchLabels:
+      app: "database-mysql-person"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "database-mysql-person"
+    spec:
+      containers:
+        - name: "database-mysql-person"
+          image: mysql:8.0.29
+          envFrom:
+            - configMapRef:
+                name: database-mysql-person-configmap
+            - secretRef:
+                name: database-mysql-person-secret
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: db-pv-claim
