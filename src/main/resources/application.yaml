@@ -14,7 +14,7 @@ app:
 ################################################
 spring:
   kafka:
-    bootstrap-servers: ${BOOTSTRAP_SERVERS_HOST:localhost}:${BOOTSTRAP_SERVERS_PORT:29092}
+    bootstrap-servers: ${BOOTSTRAP_SERVERS_HOST}:${BOOTSTRAP_SERVERS_PORT}
     listener:
       ack-mode: manual
     properties:
@@ -34,9 +34,9 @@ spring:
 # CONFIGURATION DATA SOURCE (MYSQL)
 ################################################
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:person}
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:root}
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-timeout: 3000
@@ -87,6 +87,11 @@ management:
       probes:
         enabled: true
       group:
+        liveness:
+          include:
+            - kafka
+            - db
+            - diskSpace
         readiness:
           include:
             - kafka

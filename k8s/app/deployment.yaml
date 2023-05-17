@@ -16,26 +16,27 @@ spec:
     spec:
       containers:
         - name: "ms-person"
-          image: wesleyosantos91/ms-person:v1.4
+          image: wesleyosantos91/ms-person:v1.6
           startupProbe:
             httpGet:
-              port: 8081
+              port: 8181
               path: /actuator/health/liveness
             periodSeconds: 3
             failureThreshold: 30
+            initialDelaySeconds: 30
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 8081
+              port: 8181
             periodSeconds: 3
-            timeoutSeconds: 3
+            timeoutSeconds: 7
             successThreshold: 1
-            failureThreshold: 3
+            failureThreshold: 2
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 8081
-            periodSeconds: 5
+              port: 8181
+            periodSeconds: 6
             failureThreshold: 1
             timeoutSeconds: 1
             successThreshold: 1
@@ -45,4 +46,4 @@ spec:
             - secretRef:
                 name: ms-person-secret
           ports:
-            - containerPort: 8081
+            - containerPort: 8181
