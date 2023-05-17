@@ -5,7 +5,7 @@
 
 <div align="center">
 
-# POC Aplicabilidade de probes para garantir a saúde do microserviço gerenciado pelo K8S - Utilizando Spring Boot Actuator
+# POC Aplicabilidade de probes para garantir a saúde do POD gerenciado pelo K8S utilizando Spring Boot Actuator e conceito de Liveness, Readiness e Startup
 ![](https://img.shields.io/badge/Autor-Wesley%20Oliveira%20Santos-brightgreen)
 ![](https://img.shields.io/badge/Language-java-brightgreen)
 ![](https://img.shields.io/badge/Framework-springboot-brightgreen)
