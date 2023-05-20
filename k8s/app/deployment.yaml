@@ -17,6 +17,13 @@ spec:
       containers:
         - name: "ms-person"
           image: wesleyosantos91/ms-person:v1.6
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
           startupProbe:
             httpGet:
               port: 8181
